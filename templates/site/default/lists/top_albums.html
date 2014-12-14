@@ -1,0 +1,29 @@
+{if $albums}
+<div class="swoosh">
+	<div class="content">
+		<div>
+			{foreach from=$albums item=album}
+			<div class="lockup small album music animateShadowHigh" title="{$album.album.name}, {$album.artist.name}">
+				<a class="artwork-link" href="{$album.album.link}">
+				<div class="artwork">
+					<img src="{$album.album.coverArt}" width="100" class="artwork" alt="{$album.album.name}, {$album.artist.name}" height="100">
+				</div>
+				</a>
+				<div class="lockup-info">
+					<ul class="list">
+						<li><a class="name" href="{$album.album.link}">{$album.album.name}</a></li>
+					</ul>
+				</div>
+				<div class="overlay ui-corner-bottom shadowHigh">
+					<img data-url="{link l='album.brief' q='ajax=on&id='|cat:$album.album.id}" class="ajax_qtip" src="{$theme_base}images/preview.png">
+				</div>				
+			</div>
+		 	{/foreach}
+		</div>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+{else}
+	<div class="message alert">{lang string="No albums found!"}</div>
+{/if}

@@ -1,0 +1,23 @@
+{if $summary}
+	<div class="summary">
+		{$summary}
+	</div>
+{/if}
+{if $playlists}
+	<div class="playlists search {if $inprofil}in-profil{/if}">
+		<ul>
+			{foreach from=$playlists key=id item=playlist name=playlists}
+				<li class="playlist_float"><a class="ui-corner-all" title="{$playlist.name} - {lang string='Go to playlist'}" href="{link l='playlist' q='id='|cat:$playlist.id t=$playlist.name}">{$playlist.name} <em class="fr ui-corner-all">{$playlist.count} {lang string="Songs"}</em><br /><span class="timestamp">{lang string="Created on"}: {$playlist.timestamp|date_format} {if !$inprofil}{lang string="By"}: {$playlist.username}{/if}</span></a></li>	
+			{/foreach}
+		</ul>
+		<div class="clear"></div>	 
+	</div>
+{else}
+	<div class="message alert">{lang string="No playlists found!"}</div>
+{/if}
+<div class="clear"></div>
+{if $pages}
+	<div class="pagination">
+		{$pages}
+	</div>
+{/if}

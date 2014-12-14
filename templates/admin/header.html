@@ -1,0 +1,56 @@
+{assign var="version" value="1000"}  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv= "content-type" content= "text/html; charset=iso-8859-1" >
+	<meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta name="robots" content="none" />
+    <meta name="Author" content="SpicyScripts.com, support@spicyscripts.com">
+    <meta name="copyright" content="Copyright 2012 - {$smarty.const.APP_NAME} Created by SpicyScripts.com - All rights reserved." />
+	<title>{$website_name} - {lang string='ADMIN CP'} - {$page_title}</title>
+    <style type="text/css" media="all">
+		@import url("{$theme_base}css/style.css?t=1");
+		@import url("{$theme_base}css/jquery.wysiwyg.css");
+		@import url("{$theme_base}css/facebox.css");
+		@import url("{$theme_base}css/visualize.css");
+		@import url("{$theme_base}css/date_input.css");
+    </style>
+    
+	{$js_vars}
+	<!--[if IE]><script type="text/javascript" src="{$js_base}excanvas.js"></script><![endif]-->	
+	<script type="text/javascript" src="{$js_base}jquery.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.img.preload.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.filestyle.mini.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.wysiwyg.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.date_input.pack.js"></script>
+	<script type="text/javascript" src="{$js_base}facebox.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.visualize.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.visualize.tooltip.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.select_skin.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.tablesorter.min.js"></script>
+	<script type="text/javascript" src="{$js_base}ajaxupload.js"></script>
+	<script type="text/javascript" src="{$js_base}jquery.pngfix.js"></script>
+	<script type="text/javascript" src="{$js_base}custom.js?v=1008"></script>
+	
+	    
+	<!--[if lt IE 8]><style type="text/css" media="all">@import url("{$theme_base}css/ie.css");</style><![endif]-->
+	<link rel="icon" type="image/png" href="{$website_url}favicon.ico">
+</head>
+<body>
+	{php} warnInstallFolder(); {/php}
+	
+	<div id="hld">
+		<!-- wrapper begins -->
+		<div class="wrapper">		
+			<div id="header">
+				<div class="hdrl"></div>
+				<div class="hdrr"></div>
+				
+				<h1><a href="{link l=''}">{$website_name}</a> <em>{lang string='admin panel'}</em></h1>
+				{include file="menus/main.menu.html"}
+				{include file="menus/session.menu.html"}
+				{include file="menus/breadcrumbs.html" breadcrumbs=$breadcrumbs}				
+			</div>		
+			<!-- #header ends -->    
+	
+
+      

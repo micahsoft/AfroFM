@@ -1,0 +1,63 @@
+<form method="post">
+
+						<input type="hidden" name="l" value="{$location}">
+						<p>
+							<label>{lang string="Name"}:</label><br />
+							<input type="text" name="setting[name]" class="text small" value="{$data.name}" /> 
+							{$form->error('name')}
+						</p>
+						
+						<p>
+							<label>{lang string="Key"}:</label><br />
+							<input type="text" name="setting[key]" {if $data.system == 1}readonly="readonly"{/if} class="text small" value="{$data.key}" /> 
+							{$form->error('key')}
+						</p>
+						{if $type == 'update'}
+						<p class="settingValue">
+							<label>{lang string="Value"}:</label><br />
+							{if $data.type == 'textarea'}
+								<textarea name="setting[value]">{$data.value}</textarea>
+							{elseif $data.type == 'wysiwyg'}
+								<textarea class="wysiwyg" name="setting[value]">{$data.value}</textarea>
+							{elseif $data.type == 'bool'}
+								<input type="radio" name="setting[value]" {if $data.value == 0}checked="checked"{/if} class="radio small" value="0" /> {lang string="False"}<br />
+								<input type="radio" name="setting[value]" {if $data.value == 1}checked="checked"{/if} class="radio small" value="1" /> {lang string="True"}
+							{else}
+								<input type="text" name="setting[value]" class="text small" value="{$data.value}" />
+							{/if} 
+							{$form->error('value')}
+						</p>
+						{/if}
+						<p>
+							<label>{lang string="Group"}:</label><br />
+							<input id="groups" type="text" name="setting[group]" class="text small" value="{$data.group}" /> 
+							{$form->error('group')}
+						</p>
+						<p>
+							<label>{lang string="Order"}:</label><br />
+							<input type="text" name="setting[order]" class="text small" value="{$data.order}" /> 
+							{$form->error('order')}
+						</p>
+						<p>
+							<label>{lang string="Type"}:</label>
+							<select name="setting[type]" class="styled">
+								<option {if $data.type == 'text'}selected{/if} value="text">{lang string="Text"}</option>
+								<option {if $data.type == 'textarea'}selected{/if} value="textarea">{lang string="Textarea"}</option>
+								<option {if $data.type == 'wysiwyg'}selected{/if} value="wysiwyg">{lang string="Wysiwyg"}</option>
+								<option {if $data.type == 'numeric'}selected{/if} value="numeric">{lang string="Numeric"}</option>
+								<option {if $data.type == 'bool'}selected{/if} value="bool">{lang string="True / False"}</option>
+							</select>
+							{$form->error('type')}
+						</p>						
+																													
+						<hr />
+						
+						<p>
+							<input type="submit" class="submit small" value="{if $type == 'create'}{lang string='Create'}{else}{lang string='Save'}{/if}" />
+							<a class="submit small" href="{link l='setting.add'}">{lang string="Add New"}</a> | 
+							<a class="submit small" href="{link l='settings'}">{lang string="Back"}</a>
+
+						</p>
+</form>
+
+

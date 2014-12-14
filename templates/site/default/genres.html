@@ -1,0 +1,26 @@
+
+		<div id="genre-nav" class="main nav">
+			<div class="grid3-column">
+				<ul class="list column first">
+				{foreach from=$genres key=id item=genre_name name=genres}
+					{if $seperator1 == $smarty.foreach.genres.index}
+						</ul>
+						<ul class="list column">
+					{elseif $seperator2 == $smarty.foreach.genres.index}
+						</ul>
+						<ul class="list column last">
+						<div class="marginB10">{include file="ads/getAd.html" key="AD_ZONE_300_X_250" showHeader="true"}</div>
+					{/if}					
+ 					<li class="main-list animateShadowHigh"><a class="top-level-genre" href="{link l='artists' q='id='|cat:$id t=$func->lang($genre_name)}" title="{lang string=$genre_name}">{lang string=$genre_name}</a>
+ 					{if $subgenres[$id]}
+ 					<ul class="list top-level-subgenres">
+  					{foreach from=$subgenres[$id] key=sid item=sgenre_name}
+ 						<li><a title="{lang string=$sgenre_name}" href="{link l='artists' q='id='|cat:$id|cat:'&sid='|cat:$sid t=$func->lang($sgenre_name)}">{lang string=$sgenre_name}</a></li>
+ 					{/foreach}
+ 					</ul>
+ 					</li>
+ 					{/if}
+ 				{/foreach}
+				</ul>
+			</div>
+		</div>

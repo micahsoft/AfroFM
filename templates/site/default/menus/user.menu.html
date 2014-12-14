@@ -1,0 +1,8 @@
+	<div class="clear"></div>
+    <ul class="{if $class}{$class}{else}sub-menu{/if}">
+            {if $GET.l!="profile"}<li><a href="{link l='profile'}"><strong>{lang string="View Profile"}</strong></a></li>{/if}
+            <li {if $GET.l=="account"}class="active"{/if}><a href="{link l='account'}"><strong>{lang string="Account Settings"}</strong></a></li>
+            <li {if $GET.l=="account.picture"}class="active"{/if}><a href="{link l='account.picture'}"><strong>{lang string="Change Picture"}</strong></a></li>
+            <li {if $GET.l=="account.playlists"}class="active"{/if}><a href="{link l='account.playlists'}"><strong>{lang string="Manage Playlists"}</strong></a></li>
+    </ul> <!-- /sub -->
+

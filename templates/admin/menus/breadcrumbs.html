@@ -1,0 +1,11 @@
+<div class="ui-corner-all breadcrumb">
+	<a href="{link l='home'}">{lang string="Home"}</a>
+	{foreach from=$breadcrumbs name=breadcrumbs item=breadcrumb}
+		{if $breadcrumb.link && not $smarty.foreach.breadcrumbs.last}
+			> <a href="{$breadcrumb.link}">{$breadcrumb.title}</a>
+		{else}
+			> <strong>{$breadcrumb.title}</strong>
+		{/if}	
+	{/foreach}	
+	<span class="fr">{php} checkVersion() {/php}</span>	
+</div>	

@@ -1,0 +1,92 @@
+<div class="account">
+	{include file="menus/user.menu.html"}
+	<div class="col">
+
+		<h2>{lang string="Account Settings"}</h2>
+
+		{if $GET.success}
+		<div class="message success">
+	 		{lang string="The information has been successfully saved."}
+		</div>
+ 		{else}
+		<div class="message alert">
+	 		{lang string="Use the form below to edit your account settings, then click save."}
+		</div>
+ 		{/if} 
+
+
+		<form method="POST" class="forms">
+			<strong>{lang string="Current password"}:</strong>
+			<div class="form-element">
+				<input type="password" name="curpassword" value=""/>
+				{$form->error('curpassword')}
+			</div>
+			
+			<strong>{lang string="New password"}:</strong>
+			<div class="form-element">
+				<input type="password" name="newpassword" value=""/>
+				{$form->error('newpassword')}
+			</div>
+			
+			<strong>{lang string="Email address:"}</strong>
+			<div class="form-element">
+				<input type="text" name="email" value="{$user.email}"/>
+				{$form->error('email')}
+			</div>
+			
+			<strong>{lang string="Birthday"}:</strong>
+			<div class="form-element">
+				<input class="date" type="text" name="bday" value="{$user.bday}">
+				{$form->error('bday')}
+			</div>
+			
+			<div class="fl marginR20">
+			<strong>{lang string="I am:"}</strong>
+			<div class="form-element">
+				<select name="sex" tabindex="5" id="sexSelect">
+					<option value="">---</option>
+				   <option {if $user.sex == 'male'}selected{/if} value="male">{lang string="Male"}</option>
+				   <option {if $user.sex == 'female'}selected{/if} value="female">{lang string="Female"}</option>
+				</select>
+				{$form->error('sex')}
+			</div>
+			</div>
+			<div class="fl">
+			<strong>{lang string="Country"}:</strong>
+			<div class="form-element">
+				<select name="country" tabindex="5" id="countrySelect">
+					<option>---</option>
+					{section name=i loop=$countries}
+					<option {if $user.country.id == $countries[i].id}selected{/if} value="{$countries[i].id}">{$countries[i].name}</option>
+					{/section}
+				</select>
+				 {$form->error('country')}
+			</div>
+			</div>
+			
+			<div class="clear"></div>
+			
+			<strong>{lang string="Site Language"}:</strong>
+			<div class="form-element">
+				<select name="language" tabindex="5" id="languageSelect">
+					<option>---</option>
+					{foreach from=$func->getLanguages() item=lang name=languages}
+					<option {if $user.language == $lang.code}selected{/if} value="{$lang.code}">{lang string=$lang.name}</option>
+					{/foreach}
+				</select>
+				 {$form->error('language')}
+			</div>
+			
+			
+			<strong>{lang string="About Me"}:</strong>
+			<div class="form-element">
+				<textarea name="about">{$user.about}</textarea>
+				{$form->error('about')}
+			</div>
+						
+			<br>		
+			<input type="hidden" name="subsettings" value="1">
+			<input type="submit" class="form-submit" value="Save"/>
+		</form>
+	</div>
+</div>

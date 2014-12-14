@@ -1,0 +1,120 @@
+
+	<div class="block">
+			
+		<div class="block_head with_search">
+				<div class="bheadl"></div>
+				<div class="bheadr"></div>
+				<h2>{lang string='Users'}</h2>
+				<ul class="fr">
+					<li><a title="{lang string='Add users'}" href="{link l='user.add'}">{lang string='Add users'}</a></li>
+					<li {if $GET|@sizeof > 2}class="active"{/if}><a class="toggleSearch" title="{lang string='Search playlists'}" href="#">{lang string='Search users'}</a></li>
+				</ul>
+		</div>
+				
+		<div class="block_subhead" style="{if $GET|@sizeof == 2}display:none;{/if}">
+			<form id="search" action="{$location}" method="get">
+				<div class="row">
+					<label>{lang string="User ID"}</label>
+					<input type="text" class="text" name="id" value="{$GET.id}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Username"}</label>
+					<input type="text" class="text" name="username" value="{$GET.username}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Country"}</label>
+					<select name="country" class="cmf-skinned-select">
+						<option value="">{lang string='From any country'}</option>
+				    	{section name=i loop=$countries}
+				    	<option {if $GET.country == $countries[i].id}selected{/if} value="{$countries[i].id}">{$countries[i].name}</option>
+				    	{/section}
+					</select>				
+				</div>	
+				<div class="row">
+					<label>{lang string="User Level"}</label>
+					<select name="userlevel" class="cmf-skinned-select">
+						<option {if $GET.userlevel == ''}selected{/if} value="">{lang string="All Users"}</option>	
+						<option {if $GET.userlevel == '1'}selected{/if} value="1">{lang string="Regular Users"}</option>
+						<option {if $GET.userlevel == '9'}selected{/if} value="9">{lang string="Super Users"}</option>				
+					</select>
+				</div>
+				<input type="submit" class="submit tiny" name="search" value="{lang string='Search'}">
+				<a href="{link l='users'}" class="submit tiny">{lang string='Reset'}</a>				
+			</form>
+			<div class="clear"></div>
+		</div>	
+		
+		<div class="block_content">
+				
+			{if $users}
+					<form id="manage" data-items="users">
+					
+						<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
+						
+							<thead>
+								<tr>
+									<th width="10"><input type="checkbox" class="check_all" /></th>
+									<th>{lang string='ID'}</th>
+									<th>{lang string='Picture'}</th>
+									<th>{lang string='Username'}</th>
+									<th>{lang string='Country'}</th>
+									<th>{lang string='Birthday'}</th>
+									<th>{lang string='# Playlists'}</th>
+									<th>{lang string='Last Login'}</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+							
+								{foreach from=$users key=id item=user name=users}
+								<tr>
+									<td><input name="selected[]" class="selected" type="checkbox" value="{$user.id}" /></td>
+									<th><a title="{lang string='Edit user'}" href="{link l='user.edit' q='id='|cat:$user.id}">{$user.id}</a></th>
+									<td><a target="_blank" href="{link mode='front' l='profile' q='u='|cat:$user.id}"><div class="user-pic"><img class="user-pic-small" src="{$website_url}{$smarty.const.DIR_PROFILE_PICS}{if $user.picture}{$user.picture}{else}profile_small_{$user.sex}.gif{/if}"></div></a></td>
+									<td><a target="_blank" href="{link mode='front' l='profile' q='u='|cat:$user.id}">{$user.username}</a></td>
+									<td>{if $user.country.id}{$user.country.name} <img class="marginL5" src="{$theme_base}images/flags/{$user.country.id|lower}.png"/>{else}-{/if}</td>
+									<td>{if $user.bday}{$user.bday|date_format}{else}-{/if}</td>
+									<td><a href="{link l='playlists' q='uid='|cat:$user.id}">{$user.playlists}</a></td>
+									<td>{$user.timestamp|date_format}</td>
+									<td class="action">
+										<a title="{lang string='View user'}" target="_blank" href="{link mode='front' l='profile' q='u='|cat:$user.id}">{lang string='View Profile'}</a>
+										<a title="{lang string='Edit user'}" href="{link l='user.edit' q='id='|cat:$user.id}">{lang string='Edit'}</a>	
+										<a class="ajax delete" title="{lang string='Delete user'}" href="{link l='users'}" data-action="delete" data-item="user" data-params="ajax=on&action=rmuser&uid={$user.id}">{lang string='Delete'}</a>
+									</td>									
+								</tr>
+								{/foreach}
+							</tbody>
+							
+						</table>
+						
+						
+						
+						<div class="tableactions">
+							<select name="action">
+								<option value="">---</option>
+								<option value="delete">{lang string='Delete'}</option>
+							</select>
+							
+							<input type="submit" class="submit tiny" value="Apply to selected" />
+						</div>		<!-- .tableactions ends -->
+						
+						
+						
+						<div class="pagination right">
+							{$pages}
+						</div>		<!-- .pagination ends -->
+						
+					</form>
+					
+								
+			{else}
+				<div class="message info">{lang string="No users found!"}</div>
+			{/if}
+					
+		</div>		<!-- .block_content ends -->
+				
+		<div class="bendl"></div>
+		<div class="bendr"></div>
+	</div>		<!-- .block ends -->
+

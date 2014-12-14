@@ -1,0 +1,8 @@
+<p class="user">
+	{lang string='Hello'}, 
+	{if $session->logged_in}
+		<a href="{link l='user.edit' q='id='|cat:$session->username}">{$session->username}</a> | <a href="{link mode='front' l='home'}">{lang string='frontend'}</a> | <a href="{link l='home' q='logout=1'}">{lang string='logout'}</a>
+	{else}
+		{$session->username} | <a href="{link l='login'}">{lang string='login'}</a>
+	{/if}
+</p>

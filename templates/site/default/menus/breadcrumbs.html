@@ -1,0 +1,14 @@
+{if $breadcrumbs}
+<ul id="breadcrumbs" class="ui-corner-bottom">
+	<li class="link ui-corner-right ui-corner-left"><a href="{link l='home'}">{lang string="Home"}</a></li>
+	{foreach from=$breadcrumbs name=breadcrumbs item=breadcrumb}
+		{if $breadcrumb.link && not $smarty.foreach.breadcrumbs.last}
+			<li class="link ui-corner-right ui-corner-left"><a href="{$breadcrumb.link}">{$breadcrumb.title}</a></li>
+		{else}
+			<li class="last">{$breadcrumb.title}</li>
+		{/if}	
+	{/foreach}
+	<div class="clear"></div>
+</ul>
+{/if}
+<div class="clearer"></div>

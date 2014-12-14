@@ -1,0 +1,105 @@
+
+	<div class="block">
+			
+		<div class="block_head with_search">
+				<div class="bheadl"></div>
+				<div class="bheadr"></div>
+				<h2>{lang string='Playlists'}</h2>
+				<ul class="fr">
+					<li {if $GET|@sizeof > 2}class="active"{/if}><a class="toggleSearch" title="{lang string='Search playlists'}" href="#">{lang string='Search playlists'}</a></li>
+				</ul>
+		</div>
+
+		<div class="block_subhead" style="{if $GET|@sizeof == 2}display:none;{/if}">
+			<form id="search" action="{$location}" method="get">
+				<div class="row">
+					<label>{lang string="Playlist ID"}</label>
+					<input type="text" class="text" name="id" value="{$GET.id}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Playlist Name"}</label>
+					<input type="text" class="text" name="name" value="{$GET.name}">
+				</div>	
+				<div class="row">
+					<label>{lang string="User ID"}</label>
+					<input type="text" class="text" name="uid" value="{$GET.uid}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Username"}</label>
+					<input type="text" class="text" name="username" value="{$GET.username}">
+				</div>	
+				<input type="submit" class="submit tiny" name="search" value="{lang string='Search'}">
+				<a href="{link l='playlists'}" class="submit tiny">{lang string='Reset'}</a>				
+			</form>
+			<div class="clear"></div>
+		</div>		
+
+		<div class="block_content">
+				
+			{if $playlists}
+					<form id="manage" data-items="playlists">
+					
+						<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
+						
+							<thead>
+								<tr>
+									<th width="10"><input type="checkbox" class="check_all" /></th>
+									<th>{lang string='ID'}</th>
+									<th>{lang string='Playlist Name'}</th>
+									<th>{lang string='# Tracks'}</th>
+									<th>{lang string='Date created'}</th>
+									<th>{lang string='Created by'}</th>
+									<td>&nbsp;</td>
+								</tr>
+							</thead>
+							
+							<tbody>
+							
+								{foreach from=$playlists key=id item=playlist name=playlists}
+								<tr>
+									<td><input name="selected[]" class="selected" type="checkbox" value="{$playlist.id}" /></td>
+									<td>{$playlist.id}</td>
+									<td><a target="_blank" href="{link mode='front' l='playlist' q='id='|cat:$playlist.id}">{$playlist.name}</a></td>
+									<td>{$playlist.count}</td>
+									<td>{$playlist.timestamp|date_format}</td>
+									<td><a target="_blank" href="{link mode='front' l='profile' q='u='|cat:$playlist.uid}">{$playlist.username}</a></td>
+									<td class="action">
+										<a target="_blank" title="{lang string='View playlist'}" href="{link mode='front' l='playlist' q='id='|cat:$playlist.id}">{lang string='View'}</a>
+										<a class="ajax delete" title="{lang string='Delete playlist'}" href="{link l='playlists'}" data-action="delete" data-item="playlist" data-params="ajax=on&action=rmplaylist&pid={$playlist.id}">{lang string='Delete'}</a>	
+									</td>
+								</tr>
+								{/foreach}
+							</tbody>
+							
+						</table>
+						
+						
+						
+						<div class="tableactions">
+							<select name="action">
+								<option value="">---</option>
+								<option value="delete">{lang string='Delete'}</option>
+							</select>
+							
+							<input type="submit" class="submit tiny" value="Apply to selected" />
+						</div>		<!-- .tableactions ends -->
+						
+						
+						
+						<div class="pagination right">
+							{$pages}
+						</div>		<!-- .pagination ends -->
+						
+					</form>
+					
+								
+			{else}
+				<div class="message info">{lang string="No playlists found!"}</div>
+			{/if}
+					
+		</div>		<!-- .block_content ends -->
+				
+		<div class="bendl"></div>
+		<div class="bendr"></div>
+	</div>		<!-- .block ends -->
+

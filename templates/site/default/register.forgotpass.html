@@ -1,0 +1,69 @@
+<div class="layout1">
+		
+		<div class="col first">
+			<h1>{lang string="Reset Password"}</h1>
+			<br />
+			
+			{if $success}
+			<div class="message success">
+				<strong>{lang string="Your password has been reset and sent to your email"}</strong>
+			</div>
+			{else}
+			<div class="message alert">	
+				<strong>{lang string="Forgot your password?"}</strong> {lang string="Please enter your username below."}
+			</div>
+			{/if}
+			
+			<form method="POST" class="forms">
+			<div class="form-sub"><strong>{lang string="Username:"}</strong></div> 
+			<div class="form-element">
+				<input type="text" id="username" name="username" value="{$POST.username}" />
+					{$form->error('username')}
+				</div>
+
+				<div class="marginT20">	
+					<input type="submit" class="ui-corner-all form-submit" value="{lang string='Reset Password'}" />
+				</div>	
+				<div class="clear"></div>
+				<input type="hidden" name="subforgot" value="1">
+				<input type="hidden" name="refererLoc" value="{$refererLoc}">
+				<input type="hidden" name="refererParams" value="{$refererParams}">
+			</form>
+
+			<script>$('#username').focus();</script>
+
+		</div> <!-- /list-parent -->
+		
+		<div class="col last">
+			<h1>{lang string="Log In"}</h1>
+			<br />
+			<div class="message alert">
+				<strong>{lang string="Already a member?"}</strong> {lang string="Please login below."}
+			</div>
+			<br />
+			<form method="POST" class="forms">
+			<div class="form-sub"><strong>{lang string="Username:"}</strong></div> 
+			<div class="form-element">
+				<input type="text" id="login_username" name="login_username" value="{$POST.login_username}" />
+					{$form->error('login_username')}
+				</div>
+				<div class="form-sub"><strong>{lang string="Password:"}</strong></div> 
+				<div class="form-element">
+					<input type="password" name="login_password" value="" />
+					{$form->error('login_password')}
+				</div>
+				<div class="clear"></div>
+				<div class="fl">
+					<strong>{lang string="Remember:"}</strong> &nbsp; <input type="checkbox" name="remember" value="{$POST.remember}" />
+				</div>	
+				<div class="fr marginR20">	
+					<span class="fl marginR10"><a href='{link l="register.forgotpass"}'>{lang string="forgot password?"}</a></span>	
+					<input type="submit" class="ui-corner-all form-submit" value="{lang string='Log In'}" />
+				</div>	
+				<div class="clear"></div>
+				<input type="hidden" name="sublogin" value="1">
+				<input type="hidden" name="refererLoc" value="{$refererLoc}">
+				<input type="hidden" name="refererParams" value="{$refererParams}">
+			</form>
+		</div>
+</div>

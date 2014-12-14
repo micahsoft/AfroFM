@@ -1,0 +1,28 @@
+		</div> 
+    	<div class="cap bottom"></div>
+	</div>
+	</div>
+	<div id="footer-advert">
+    	<div id="footer-advert-inner">
+    		{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}
+		</div>
+	</div>
+
+	<!-- /footer-advert -->
+	<div id="footer">
+		{lang string='Artists and albums information are gathered using the iTunes API service'} / {lang string='Music Tracks are played remotely from youtube'}<br>
+		{lang string='We are not affiliated with iTunes and we do not host any mp3\'s or videos on our servers'}<br>
+		{lang string='All Rights Reserved'} <a href="{$website_url}"><b>{$website_name}</b></a> 2011 &copy;	- {lang string='Powered by'} <a target="_blank" href="{$smarty.const.APP_URL}">{$smarty.const.APP_NAME}</a> v{$smarty.const.APP_VERSION}
+	</div> 
+	<!-- /footer -->
+	{include file="items/playlists.box.html"}
+	
+	{if $module_js} 
+    <script type="text/javascript" src="{$website_url}{$module_js}"></script>
+    {/if}
+
+</body>
+</html>
+
+
+

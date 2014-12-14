@@ -1,0 +1,197 @@
+body{padding:0;margin:0}
+.container {
+    width: 445px;
+    margin: 0;
+}
+
+#header {
+    height : 100px;
+    border-bottom: 1px solid #cccccc;
+}
+
+#header #logo {
+    font-size: 32px;
+    float: left;
+    margin-top: 30px;
+    color: #000;
+}
+
+#header #bookmark {
+    float: right;
+    margin-top: 30px;
+}
+
+#content {
+    width: 445px;
+
+}
+
+#content-upper-top {
+    height: 46px;
+}
+
+#content-upper-bottom {
+    min-height: 260px;
+}
+#content-upper-bottom h1 {
+    font-size: 32px;
+    font-style: italic;
+    font-family: georgia,serif;
+
+}
+
+#content-upper-bottom p {
+    font-size: 16px;
+    color: #666;
+}
+
+#download-form {
+    background: url(form.png) top center repeat-x;
+    height: 87px;
+}
+
+#download-form input {
+    font-size: 24px;
+    padding: 5px;
+    color: #666;
+    margin: 20px 0px 20px 20px;
+    width : 480px;
+    height: 37px;
+}
+
+#download-form a:link,#download-form a:visited  {
+    background: url(button.png) top center repeat-x;
+    width: 218px;
+    height: 58px;
+    display: block;
+    float: right;
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    margin: 15px 15px 0px 0px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#download-form a span {
+   
+}
+#java-required {
+    text-align: center;
+    color: #666;
+    margin: 10px 0px 10px 0px;
+}
+
+#content-lower {
+    border-top: 1px solid #cccccc;
+    height: 170px;
+}
+
+
+
+.features {
+    margin: 50px 10px 50px 10px;
+}
+
+.features li {
+    list-style: none;
+    float: left;
+    width: 240px;
+    background: url(star.png) top left no-repeat;
+}
+.features h3 {
+    margin: 0px 10px 0px 45px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.features p {
+    margin: 0px 10px 0px 45px;
+    color: #3e3e3e;
+    font-size: 13px;
+}
+
+.fader {
+    width:887px;
+    margin:0 auto;
+    background: url(fade.gif) top left no-repeat;
+    height: 20px;
+}
+
+#footer {
+    height: 100%;
+}
+
+#footer-links {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+/* Download Link Code */
+
+#vidfetchLinks
+{
+    min-height: 300px;
+}
+
+#vidfetchLinks ul {
+    margin-top: 10px;
+    float : left;    
+    width: 180px;
+}
+#vidfetchLinks ul.video {
+    background: url("video.png") top center no-repeat;
+    padding-top:60px;
+}
+#vidfetchLinks ul.audio {
+    background: url("audio.png") top center no-repeat;
+    padding-top:60px;
+}
+#vidfetchLinks li {
+    list-style: none;
+    border-bottom: 1px solid #eee;
+    margin: 4px 0;
+}
+
+
+
+#vidfetchLinks li a{
+    color: #486b78;
+    font-size: 11px;
+    text-decoration: none;
+    margin: 0;
+}
+
+#vidfetchLinks li a span {
+    
+}
+
+
+.vtitle {
+    padding-top: 20px;
+    text-align:  center;
+    font-size: 18px;
+    color: #486b78;
+}
+.vimage {
+    text-align: center;
+    margin: 30px;
+}
+.vimage img {
+    width: 120px;
+    height: 90px;
+    border: 1px solid #999;
+    padding:5px;
+}
+.invalidUrl{
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+
+}
+
+.previewWarning {
+    text-align: center;
+    margin:5px;
+    font-weight:bold;
+}

@@ -1,0 +1,43 @@
+
+<div class="center-stack">
+	<div class="alphaBox ui-corner-all">
+		<ul class="list alpha">
+              	<li><a class="ui-corner-all {if !$currentLetter}selected{/if}" title="Popular Artists" href="{link l='artists' q='id='|cat:$currentId}">{lang string="Popular Artists"}</a></li>
+				<li> &nbsp </li>
+              	{if $subgenres}
+              		{foreach from=$alphas item=alpha}
+              			<li><a class="ui-corner-all {if $currentLetter == $alpha}selected{/if}" href="{link l='artists' q='id='|cat:$currentId|cat:'&sid='|cat:$currentSid|cat:'&letter='|cat:$alpha|replace:'#':'*'}">{$alpha}</a></li>
+              		{/foreach}
+              	{else}
+              		{foreach from=$alphas item=alpha}
+              			<li><a class="ui-corner-all {if $currentLetter == $alpha}selected{/if}" href="{link l='artists' q='id='|cat:$currentId|cat:'&letter='|cat:$alpha|replace:'#':'*'}">{$alpha}</a></li>
+              		{/foreach}
+              	{/if}
+		</ul> 
+		<div class="clear"></div> 
+		{if $pages} 
+		<ul class="list paginate">
+			{foreach from=$pages item=page name=pages}
+				<li><a class="ui-corner-all {if $currentPage == $page.page}selected{/if}" href="{link l='artists' q='id='|cat:$currentId|cat:'&letter='|cat:$currentLetter|replace:'#':'*'|cat:'&page='|cat:$page.page}">{$page.caption}</a></li>
+			{/foreach}	
+		</ul>	
+		{/if}
+	</div>	
+	<div class="marginT5 paddingB5">{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}</div>
+	<div class="marginT5">
+		{if $artists}
+			{include file="lists/artists.html" artists=$artists bygenre="true"}
+		{/if}
+	</div> 
+</div>
+<div id="genre-nav" class="nav">
+	<div class="darkBox ui-corner-all">
+		{include file="lists/genres.html" genres=$genres currentId=$currentId}
+		<div class="clear"></div>
+	</div>
+	{if $totalArtists > 180}	
+	<div class="margin5 aligncenter">{include file="ads/getAd.html" key="AD_ZONE_160_X_600"}</div>
+	{/if}
+</div>
+				
+        

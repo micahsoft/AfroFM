@@ -1,0 +1,51 @@
+<script>var username = '{$user.username}';</script>
+		<div id="title" class="intro">
+			<span class="fr share-this">{include file="items/sharethis.html"}</span>
+			<h1>{$user.username} {if $user.is_online}<img class="ui-corner-all" src="{$theme_base}images/online.gif">{/if}</h1>
+			<div class="clear"></div>
+		</div>
+
+		<div class="centerBox center-stack">
+			{if $user.about}
+			<div id="biography" class="biography collapsed">
+				<h4>{lang string="About Me"}</h4>
+				<div class="teaser">
+					<div>{$user.about}</div>
+				</div>
+			</div>
+			<br />
+			{/if}
+
+			<h4>{lang string="My Playlists"} ({$user.playlists})</h4>
+			{if $playlists}
+			    <div class="marginT10">{include file="lists/playlists.html" playlists=$playlists inprofil=true pages=$pages}</div>
+			{else}
+				<div class="marginT20 message alert">{$user.username} {lang string="has no playlists yet!"}</div>
+			{/if}
+			<br />
+
+			<h4>{lang string="Top Playlists Songs"}</h4>
+			{if $songs}
+			    <div class="marginT10">{include file="lists/playlist.html" showArtist=true songs=$songs}</div>
+			{else}
+				<div class="marginT20 message alert">{$user.username} {lang string="has no top songs yet!"}</div>
+			{/if}	
+			<br />
+		</div>
+		<div id="left-stack">
+			<div class="darkBox ui-corner-all">
+				<div class="user-picture hidden"><a class="lightbox" target="_blank" href='{if $user.picture}{$image->get($smarty.const.DIR_PROFILE_PICS,$user.picture,600)}{else}{$website_url}{$smarty.const.DIR_PROFILE_PICS}profile_{$user.sex}.gif{/if}'><img alt="{$user.username}" src="{if $user.picture}{$image->get($smarty.const.DIR_PROFILE_PICS,$user.picture,180)}{else}{$website_url}{$smarty.const.DIR_PROFILE_PICS}profile_{$user.sex}.gif{/if}" onload="$(this).parent().parent().fadeIn()"/></a></div>
+
+				<div class="bio-stats">
+					{if $user.country.name}<h4>{lang string="From"}:</h4> <p>{$user.country.name} <img src="{$theme_base}images/flags/{$user.country.id|lower}.png"/></p>{/if}
+					<h4>{lang string="Last activity"}:</h4> <p>{$user.timestamp|date_format}</p>
+				</div>
+
+				{if $session->logged_in && $session->isSessionUser($user.username)} 
+					{include file="menus/user.menu.html" class="profile"} 
+				{/if}
+			</div>	
+
+			<div class="ads">{include file="ads/getAd.html" key="AD_ZONE_160_X_600" showHeader="true"}</div>
+		</div>
+		

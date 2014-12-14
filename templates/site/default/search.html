@@ -1,0 +1,20 @@
+<div class="center-stack">
+	<div class="marginB10">{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}</div>
+	{if $artists}
+		{include file="lists/artists.html" artists=$artists}
+	{elseif $albums}
+		{include file="lists/albums.html" albums=$albums}
+	{elseif $songs}
+		{include file="lists/playlist.html" showArtist="true"}
+	{elseif $videos} 
+		{include file="lists/playlist.html" showArtist="true" songs=$videos isVideo="true"}
+	{else}
+		<div class="message alert">{lang string="No results found for this query!"}</div>	
+	{/if}
+</div>
+<div id="genre-nav" class="nav">
+	<div class="darkBox ui-corner-all">
+		{include file="lists/genres.html" genres=$genres}
+		<div class="clear"></div>
+	</div>
+</div>

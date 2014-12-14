@@ -1,0 +1,20 @@
+{if $currentId}
+	<ul class="list first">
+	{foreach from=$genres key=id item=genre_name name=genres}				
+		<li class="ui-corner-all {if $id == $currentId} selected {/if}"><a class="top-level-genre" href="{link l='artists' q='id='|cat:$id t=$func->lang($genre_name)}" title="{lang string=$genre_name}">{lang string=$genre_name}</a></li>
+		{if $id == $currentId && $subgenres}
+			<ul class="ui-corner-bottom list top-level-subgenres">
+  				{foreach from=$subgenres[$id] key=sid item=sgenre_name}
+ 					<li class="ui-corner-all {if $sid == $currentSid}selected{/if}"><a title="{lang string=$sgenre_name}" href="{link l='artists' q='id='|cat:$id|cat:'&sid='|cat:$sid t=$func->lang($sgenre_name)}">{lang string=$sgenre_name}</a></li>
+ 				{/foreach}
+			</ul>		
+		{/if}
+	{/foreach}
+	</ul>
+{else}			
+	<ul class="list first">
+		{foreach from=$genres key=id item=genre_name name=genres}
+		<li class="ui-corner-all"><a class="top-level-genre" href="{link l='artists' q='id='|cat:$id t=$func->lang($genre_name)}" title="{lang string=$genre_name}">{lang string=$genre_name}</a></li>
+		{/foreach}
+	</ul>
+{/if}

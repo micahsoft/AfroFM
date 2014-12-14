@@ -1,0 +1,17 @@
+{if $artists}
+	<div class="artists search">
+		<ul>
+			{foreach from=$artists key=id item=artist name=artists}
+				{if $bygenre == "true"}
+					<li class="artist_float"><a class="ui-corner-all" title="{$artist} - {lang string='Visit Artist'}" href="{link l='artist' q='id='|cat:$id t=$artist}">{$artist} <span class="preview"><img data-url="{link l='artist.brief' q='ajax=on&id='|cat:$id}" class="ajax_qtip" src="{$theme_base}images/preview.png"></span></a></li>	
+				{else}
+					<li class="artist_float"><a class="ui-corner-all" title="{$artist.artistName} - {lang string='Visit Artist'}" href="{link l='artist' q='id='|cat:$artist.artistId t=$artist.artistName}">{$artist.artistName} <em>{$artist.primaryGenreName}</em> <span class="preview"><img data-url="{link l='artist.brief' q='ajax=on&id='|cat:$artist.artistId}" class="ajax_qtip" src="{$theme_base}images/preview.png"></span></a></li>	
+				{/if}
+			{/foreach}
+		</ul>
+		<div class="clear"></div>
+	</div>
+{else}
+	<div class="message alert">{lang string="No artists found!"}</div>
+{/if}
+<div class="clear"></div>

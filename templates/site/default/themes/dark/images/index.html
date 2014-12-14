@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="css/jquery.customYtPlayer.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.swfobject.1-1-1.min.js"></script>
+<script type="text/javascript" src="js/jquery.customYtPlayer.js"></script>
+<script>
+$(document).ready(function(){
+	$('.youtube').customYtPlayer();
+});
+</script>
+<style>
+.code {
+	border: 1px solid #CC0000;
+	background: #FFFFCC;
+	padding: 10px;
+	width: 40%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+#test-1 {
+	width: 350px;
+	height: 300px;
+	border: 1px solid #527fa2;
+	padding: 8px;
+}
+</style>
+</head>
+
+<body>
+<h3>Examples</h3>
+<p>Below two examples. In first width is fixed through style attribute (480px). In second width is assumed default (640px)</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="15">
+  <tr>
+    <td><a class="youtube" href="http://www.youtube.com/watch?v=CD2LRROpph0" style="width: 480px;"></a></td>
+    <td><a class="youtube" href="http://www.youtube.com/watch?v=zzfQwXEqYaI"></a></td>
+  </tr>
+</table>
+
+
+
+<p><strong>Code</strong>: </p>
+<p class="code">&lt;link rel=&quot;stylesheet&quot; href=&quot;<strong>../css/jquery.customYtPlayer.css</strong>&quot; type=&quot;text/css&quot;&gt;</p>
+<p class="code">&lt;script src=&quot;<strong>../js/jquery-1.5.min.js</strong>&quot;&gt;&lt;/script&gt;<br />
+  &lt;script type=&quot;text/javascript&quot; src=&quot;<strong>../js/jquery.swfobject.1-1-1.min.js</strong>&quot;&gt;&lt;/script&gt;<br />
+  &lt;script type=&quot;text/javascript&quot; src=&quot;<strong>../js/jquery.customYtPlayer.js</strong>&quot;&gt;&lt;/script&gt;<br />
+</p>
+<p class="code">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+  <strong>$(function(){<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(&quot;a.youtube&quot;).customYtPlayer();<br />
+  });</strong><br />
+&lt;/script&gt;</p>
+<p class="code"><strong>&lt;a class=&quot;youtube&quot; href=&quot;http://www.youtube.com/watch?v=CD2LRROpph0&quot; style=&quot;width: 480px;&quot;&gt;&lt;/a&gt;</strong><br />
+  <br />
+  or<br />
+  <br />
+<strong>&lt;a class=&quot;youtube&quot; href=&quot;http://www.youtube.com/watch?v=zzfQwXEqYaI&quot;&gt;&lt;/a&gt;</strong></p>
+</body>
+</html>

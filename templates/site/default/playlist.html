@@ -1,0 +1,27 @@
+<div id="title" class="intro">
+	<span class="fr share-this">{include file="items/sharethis.html"}</span>
+	<h1>{$playlist.name|upper} <span class="createdby"><a href="{link l='profile' q='u='|cat:$playlist.username}">{lang string="created by"} {$playlist.username}</a></span></h1>
+	<div class="clear"></div>
+</div>
+<div class="center-stack playlists">
+	{include file="lists/playlist.html" songs=$songs showArtist="true" pid=$playlist.id}
+</div>
+<div id="left-stack" class="playlists">
+	<div class="darkBox ui-corner-all">
+		<h4><a href="{link l='profile' q='u='|cat:$playlist.username}">{$playlist.username|ucfirst}'s</a> {lang string="Playlists"}:</h4>
+		<ul class="marginT10">
+			{if $playlists}
+				{foreach from=$playlists item=pl}
+					<li class="padding5 playlist-item {if $pl.id == $GET.id}selected{/if}">
+						{if $session->isSessionUser($playlist.username)}<span class="edit fr"><a href="{link l='account.playlists' q='id='|cat:$pl.id t=$pl.name}" title="{lang string='Edit Playlist'}"><img title="{lang string='Edit Playlist'}" src="{$theme_base}/images/pencil.png"></a></span>{/if}					
+						<a href="{link l='playlist' q='id='|cat:$pl.id t=$pl.name}">{$pl.name} <em>({$pl.count})</em></a>
+					</li>
+				{/foreach}
+			{/if}
+			<div class="clear"></div>
+		</ul>
+		<div class="clear"></div>
+		<br /><br />
+	</div>
+	<div class="marginT10">{include file="ads/getAd.html" key="AD_ZONE_250_X_250"}</div>
+</div>	

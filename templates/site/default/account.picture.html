@@ -1,0 +1,38 @@
+<div class="account">
+	{include file="menus/user.menu.html"}
+	<div class="col">
+
+		<h2>{lang string="Upload Picture"}</h2>
+		
+		{if $GET.uploadSuccess}
+		    <div class="message success">
+		    {lang string="The picture has been successfully uploaded."}
+		    </div> 
+		{elseif $GET.removeSuccess}
+		    <div class="message success">
+		    {lang string="The picture has been successfully removed."}
+		    </div> 
+		{else}
+		    <div class="message alert">
+		    {lang string="Use the form below to upload a profile picture"}. <br>{lang string="Only jpeg, gif, and png files are allowed. Filesize must be under 2 megabytes."}
+		    </div> 
+		{/if}
+		
+		<div class="fl marginR10 paddingL10 user-picture">
+			<img id="user-pic" src="{$website_url}{$smarty.const.DIR_PROFILE_PICS}{if $user.picture}{$user.picture}{else}profile_small_{$user.sex}.gif{/if}" alt="Picture"/>
+		</div>
+
+		
+		<form method="post" class="fl forms">
+			<p class="fileupload">
+				<label>{lang string="Picture"}:</label><br />
+				<input type="file" name="picture" id="fileupload" data-name="{lang string='User Picture'}" data-action="{link l='account.picture' q='ajax=on'}" data-params="action=uploadpic" data-filepath="{$website_url}{$smarty.const.DIR_PROFILE_PICS}" data-targetimage="#user-pic"/>
+				<span id="uploadmsg">{lang string="Max size 2Mb"}</span>
+			</p>	
+			<input type="hidden" name="rempicture" value="1">
+			<input name="submit" type="submit" class="form-submit" value='{lang string="remove picture"}'/>
+		</form>
+		<br clear="all"/>
+	</div>	
+</div>
+

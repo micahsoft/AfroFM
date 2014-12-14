@@ -1,0 +1,61 @@
+<div class="account">
+	{include file="menus/user.menu.html"}
+	<div class="col">
+	
+		{if $playlist}
+			<h2>{lang string="My playlists"} ({$playlists|@sizeof})</h2>
+			
+			{if $GET.updateSuccess}
+				<div class="message success">
+					 {lang string="Playlist has been successfully updated."}
+				</div>
+			{elseif $GET.removeSuccess}
+				<div class="message success">
+					 {lang string="Playlist has been successfully deleted."}
+				</div>
+			{/if} 
+		
+			<div class="clear"></div>
+			
+			<span id="select-playlist">
+				<span class="fl">
+					<select name="playlists" onchange="location.href = $(this).val();">
+					{if $playlists} 
+						{foreach from=$playlists item=pl}
+							<option value="{link l='account.playlists' q='id='|cat:$pl.id}" {if $pl.id == $GET.id}selected{/if}>{$pl.name} ({$pl.count})</option>
+						{/foreach} 
+					{/if}
+					</select>
+				</span>
+				<span class="fl paddingL10"><a href="#" title="{lang string='Rename Playlist'}" id="rename-playlist"><img title="{lang string='Rename Playlist'}" vspace="2" src="{$theme_base}/images/pencil.png"></a></span>
+				<span class="fl paddingL10"><a href="#" title="{lang string='New Playlist'}" id="new-playlist"><img title="{lang string='New Playlist'}" vspace="2" src="{$theme_base}/images/add.png"></a></span>
+			</span>
+			
+			<span id="update-playlist" class="fl edit-playlist" style="display:none;">	
+				<form metod="post" action="submit" onsubmit="$(this).find('input[name=submit]').trigger('click'); return false;">				
+					<input type="text" class="ui-corner-all" name="playlist_name" value="{$playlist.name}">
+					<input type="submit" class="ui-corner-all" name="submit" value="save" data-pid="{$playlist.id}">
+					<input type="button" class="ui-corner-all" name="cancel" value="cancel">
+				</form>
+			</span>
+			<span id="create-playlist" class="fl edit-playlist" style="display:none;">	
+				<form metod="post" action="submit" onsubmit="$(this).find('input[name=submit]').trigger('click'); return false;">			
+					<input type="text" class="ui-corner-all" name="playlist_name" value="">
+					<input type="submit" class="ui-corner-all" name="submit" value="save" data-pid="{$playlist.id}">
+					<input type="button" class="ui-corner-all" name="cancel" value="cancel">
+				</form>
+			</span>
+			<span class="fr paddingL20"><a href="{link l='playlist' q='id='|cat:$playlist.id t=$playlist.name}">{lang string="View Playlist"}</a></span> 
+			<span class="fr paddingL20"><a href="#" id="delete-playlist" data-pid="{$playlist.id}">{lang string="Delete Playlist"}</a></span>
+			 
+			<div class="clear"></div>	
+			<div class="marginT5">{include file="lists/playlist.html" songs=$songs truncateTitles="true" showArtist="true" manage="true" pid=$playlist.id hideToolbar="true"}</div>
+
+		{else}
+			<h2>{lang string="My playlists"}</h2>
+			<div class="alert-message">
+				 {lang string="You have no playlists yet!"}
+			</div>
+		{/if}	
+	</div>
+</div>	

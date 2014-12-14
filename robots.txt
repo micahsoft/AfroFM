@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /cache/
+Disallow: /filedb/
+Disallow: /classes/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /pages/
+Disallow: /templates/
+Allow: /

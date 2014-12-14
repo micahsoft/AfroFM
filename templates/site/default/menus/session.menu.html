@@ -1,0 +1,20 @@
+<ul>
+	<li class="fl sub"><a href="javascript:void(0)">{lang string="Language"}: {lang string=$session->language}</a>
+		<ul>
+		{foreach from=$func->getLanguages() item=lang name=languages}
+    		<li><a href='{$website_url}{$lang.link}' title='{$lang.name}'>{lang string=$lang.name}</a></li>
+		{/foreach}
+		</ul>
+	</li>
+	    
+
+    {if $session->logged_in} 
+        <li class="fr">{lang string="welcome"} <a href='{link l="profile"}'>{$session->username}</a> <span>(<a href='{link l="home" q="logout=1"}'>{lang string="Logout"}</a>)</span></li>
+        {if $session->isAdmin()}
+            <li class="fr"><a href='{link mode="admin" l="home"}'>{lang string="Admin CP"}</a></li>
+        {/if}
+    {else} 
+        <li class="fr">{lang string="welcome"} {$session->username} <span>(<a class='lite' data-form-action='{link l="login"}' href='{link l="login" q="lite=on"}'>{lang string="Login / Register"}</a>)</span></li>
+    {/if}
+</ul>
+<div class="clear"></div>

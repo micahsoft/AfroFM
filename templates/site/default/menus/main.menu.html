@@ -1,0 +1,25 @@
+<div class="menu ui-corner-{if $breadcrumbs}top{else}all shadowHigh{/if}">
+	<ul class="ui-corner-{if $breadcrumbs}top{else}all{/if}">
+		<li class="first" {if $location == "home"}class="current"{/if}><a href="{link l='home'}" >{lang string="Home"}</a></li>
+		<li {if $location == "genres"}class="current"{/if}><a href="{link l='genres'}" >{lang string="Genres"}</a></li>
+		<li {if $location == "artists" || $location == "artist" || $location == "albums" || $location == "album"}class="current"{/if}><a href="{link l='artists'}" >{lang string="Artists"}</a></li>
+		<li {if $location == "playlists"}class="current"{/if}><a href="{link l='playlists'}" >{lang string="Playlists"}</a></li>
+		<li {if $location == "users" || $GET.u != "" && $location == "profile"}class="current"{/if}><a href="{link l='users'}">{lang string="Users"}</a></li>
+		{if $session->logged_in}
+			<li class="pop {if $GET.u == "" && $location == "profile" || $module == "account"}current{/if}">
+				<a title="{lang string='My Profile'}" href="{link l='profile'}">{lang string="My profile"}</a>
+				<ul class="submenu ui-corner-bottom">
+                    <li><a href="{link l='account'}"><strong>{lang string="Account Settings"}</strong></a></li>
+            		<li><a href="{link l='account.picture'}"><strong>{lang string="Change Picture"}</strong></a></li>
+            		<li><a href="{link l='account.playlists'}"><strong>{lang string="Manage Playlists"}</strong></a></li>
+            		<div class="clear"></div>
+    			</ul>
+			</li>			
+		{/if}
+		{if $fb_page_url}
+		<li class="fr">
+			<div class="fb-like" data-href="{$fb_page_url}" data-send="true" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+		</li>
+		{/if}		
+	</ul>
+</div>

@@ -1,0 +1,109 @@
+
+	<div class="block">
+		<div class="block_head with_search">
+				<div class="bheadl"></div>
+				<div class="bheadr"></div>
+				<h2>{lang string='Settings'}</h2>
+				<select name="group" id="settingsGroupMenu" class="settingsGroupMenu cmf-skinned-select">
+					{foreach from=$groups item=group name=groups}
+					<option {if $data.group == $group}selected{/if} value="{$group}">{lang string=$group}</option>		
+					{/foreach}			
+				</select>
+				<ul class="fr">
+					<li><a title="{lang string='Add setting'}" href="{link l='setting.add'}">{lang string='Add setting'}</a></li>
+					<li {if $GET|@sizeof > 2}class="active"{/if}><a class="toggleSearch" title="{lang string='Search settings'}" href="#">{lang string='Search settings'}</a></li>
+				</ul>
+		</div>
+
+		<div class="block_subhead" style="{if $GET|@sizeof == 2}display:none;{/if}">
+			<form id="search" action="{$location}" method="get">
+				<input type="hidden" name="group" value="Main Settings">
+				<div class="row">
+					<label>{lang string="Setting ID"}</label>
+					<input type="text" class="text" name="id" value="{$GET.id}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Setting Name"}</label>
+					<input type="text" class="text" name="name" value="{$GET.name}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Setting Key"}</label>
+					<input type="text" class="text" name="key" value="{$GET.key}">
+				</div>	
+				<div class="row">
+					<label>{lang string="Setting Value"}</label>
+					<input type="text" class="text" name="value" value="{$GET.value}">
+				</div>	
+				<input type="submit" class="submit tiny" name="search" value="{lang string='Search'}">
+				<a href="{link l='settings'}" class="submit tiny">{lang string='Reset'}</a>				
+			</form>
+			<div class="clear"></div>
+		</div>		
+
+		<div class="block_content">
+				
+			{if $settings}
+					<form id="manage" data-items="settings">
+					
+						<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
+						
+							<thead>
+								<tr>
+									<th width="10"><input type="checkbox" class="check_all" /></th>
+									<th>{lang string='ID'}</th>
+									<th>{lang string='Name'}</th>
+									<th>{lang string='Key'}</th>
+									<th>{lang string='Value'}</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+							
+								{foreach from=$settings key=id item=setting name=settings}
+								<tr>
+									<td><input {if $setting.system != 0} disabled="disabled"{/if} name="selected[]" class="selected" type="checkbox" value="{$setting.id}" /></td>
+									<td><a title="{lang string='Edit setting'}" href="{link l='setting.edit' q='id='|cat:$setting.id}">{$setting.id}</a></td>
+									<td>{$setting.name}</td>
+									<td>{$setting.key}</td>
+									<td>{if $setting.type == bool}{if $setting.value == 0}False{else}True{/if}{else}{$setting.value|truncate:35}{/if}</td>
+									<td class="action">
+										<a title="{lang string='Edit setting'}" href="{link l='setting.edit' q='id='|cat:$setting.id}">{lang string='Edit'}</a>
+										{if $setting.system == 0}<a class="ajax delete" title="{lang string='Delete setting'}" href="{link l='settings'}" data-action="delete" data-item="setting" data-params="ajax=on&action=rmsetting&sid={$setting.id}">{lang string='Delete'}</a>{/if}	
+									</td>
+								</tr>
+								{/foreach}
+							</tbody>
+							
+						</table>
+						
+						
+						
+						<div class="tableactions">
+							<select name="action">
+								<option value="">---</option>
+								<option value="delete">{lang string='Delete'}</option>
+							</select>
+							
+							<input type="submit" class="submit tiny" value="Apply to selected" />
+						</div>		<!-- .tableactions ends -->
+						
+						
+						
+						<div class="pagination right">
+							{$pages}
+						</div>		<!-- .pagination ends -->
+						
+					</form>
+					
+								
+			{else}
+				<div class="message info">{lang string="No settings found!"}</div>
+			{/if}
+					
+		</div>		<!-- .block_content ends -->
+				
+		<div class="bendl"></div>
+		<div class="bendr"></div>
+	</div>		<!-- .block ends -->
+

@@ -1,0 +1,29 @@
+{if $session->logged_in} 
+	{if $playlist_name}
+		{if $trackExists}<div class="message error">{lang string="Track(s) already in playlist"}{else}<div class="message success">{lang string="Track(s) added to playlist"}{/if}:<br><a href="{link l='playlist' q='id='|cat:$playlist_id}">{$playlist_name}</a></div>
+	{else}	
+		<form action="addToPlaylist" method="post" id="playlistsForm">
+			<input type="hidden" name="formData" value="{$formData}">
+
+			<ul>
+			{if $playlists}
+			
+				{foreach from=$playlists item=playlist}
+					<li class="addToPlaylist playlist-item" name="{$playlist.name}" id="{$playlist.id}" href="#">{$playlist.name} <em>({$playlist.count})</em></li>
+				{/foreach}
+			
+			{else}
+				<li>{lang string="You have no playlists"}</li>
+			{/if}
+			</ul>
+
+			<div id="createNewPlaylist" class="createNewPlaylist">
+				<div id="createLabel" class="playlist-item">{lang string="Create a new playlist"}</div>
+				<input type="text" class="playlist_name" name="playlist_name" style="display:none">
+				<input type="submit" value="create" style="display:none;">
+			</div>	
+		</form>
+	{/if}		
+{else}
+		<div class="message error">{lang string="Please login first"}!<br><a href="{link l='login'}">{lang string="Log In"}</a></center>
+{/if}

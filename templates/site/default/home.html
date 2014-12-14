@@ -1,0 +1,52 @@
+<h1 style="display:none">{lang string="Welcome to"} {$website_name}</h1>
+<div class="top-artists">
+    <span class="share-this">{include file="items/sharethis.html"}</span>
+    {if $genresDropdown}
+	<span class="genres-dropdown">{lang string="Genre"}: {$genresDropdown}</span>
+	{/if}	
+	
+	<h2 class="ui-corner-top"><div>{lang string="New Releases"}</div></h2>
+	<div class="clear"></div>
+	<div class="albums-grid">{include file="lists/top_albums.html" albums=$feeds.new_releases}</div>
+	
+	<div class="aligncente margin10">
+		{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}
+	</div>
+			
+	<h2 class="ui-corner-top"><div>{lang string="Top Songs"}</div></h2>
+	<div class="clear"></div>
+	<div class="playlist padding20">{include file="lists/playlist.html" songs=$feeds.top_songs showArtist="true" showAlbum="true"}</div>
+
+	<div class="aligncente marginB10">
+		{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}
+	</div>
+		
+	<h2 class="ui-corner-top"><div>{lang string="Featured Albums"}</div></h2>
+	<div class="clear"></div>
+	<div class="albums-grid">{include file="lists/top_albums.html" albums=$feeds.featured}</div>
+	
+	<h2 class="ui-corner-top"><div>{lang string="Top Albums"}</div></h2>
+	<div class="clear"></div>
+	<div class="albums-grid">{include file="lists/top_albums.html" albums=$feeds.top_albums}</div>
+
+	<h2 class="ui-corner-top"><div>{lang string="Just Added"}</div></h2>
+	<div class="clear"></div>
+	<div class="albums-grid">{include file="lists/top_albums.html" albums=$feeds.just_added}</div>
+			
+	<div class="clear"></div>
+	
+	{literal}
+	<script>
+		$(document).ready(function() {
+		
+			$('select#genres').change(function() {
+				var genre_id = $(this).val();
+				if(genre_id != '')
+					location.href = link('home', 'gid='+genre_id);
+				else
+					location.href = link('home');	
+			});
+		});
+	</script>	
+	{/literal}
+</div>	

@@ -1,0 +1,48 @@
+		<div id="title" class="intro">
+			<h1>{lang string="Users"}</h1>
+			<div class="clear"></div>
+		</div>
+
+		<div class="center-stack">
+			 {include file="lists/users.html" users=$users}
+		</div>
+		<div id="left-stack">
+		
+			<div class="darkBox ui-corner-all">
+				<h4>{lang string="Search Users"}</h4>
+
+				<form id="innersearch" action="{$location}" method="get">
+					<div class="row">
+						<label>{lang string="User ID"}</label>
+						<input type="text" class="text ui-corner-all" name="id" value="{$GET.id}">
+					</div>	
+					<div class="row">
+						<label>{lang string="Username"}</label>
+						<input type="text" class="text ui-corner-all" name="username" value="{$GET.username}">
+					</div>	
+					<div class="row">
+						<label>{lang string="Country"}</label>
+						<select name="country" class="ui-corner-all">
+							<option value="">{lang string='From any country'}</option>
+					    	{section name=i loop=$countries}
+					    	<option {if $GET.country == $countries[i].id}selected{/if} value="{$countries[i].id}">{$countries[i].name}</option>
+					    	{/section}
+						</select>				
+					</div>	
+					<div class="row">
+						<label>{lang string="User Level"}</label>
+						<select name="userlevel" class="ui-corner-all">
+							<option {if $GET.userlevel == ''}selected{/if} value="">{lang string="All Users"}</option>	
+							<option {if $GET.userlevel == '1'}selected{/if} value="1">{lang string="Regular Users"}</option>
+							<option {if $GET.userlevel == '9'}selected{/if} value="9">{lang string="Super Users"}</option>				
+						</select>
+					</div>
+					<input type="submit" class="button ui-corner-all" name="search" value="{lang string='Search'}">
+					<a href="{link l='users'}" class="submit tiny">{lang string='Reset'}</a>				
+				</form>
+
+				<div class="clear"></div>
+			</div>
+			
+			{include file="ads/getAd.html" key="AD_ZONE_160_X_600" showHeader="true"}
+		</div>

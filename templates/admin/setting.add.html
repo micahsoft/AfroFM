@@ -1,0 +1,24 @@
+
+	<div class="block">
+			
+		<div class="block_head">
+				<div class="bheadl"></div>
+				<div class="bheadr"></div>
+				<h2>{lang string='Add Setting'}</h2>
+		</div>		<!-- .block_head ends -->
+				
+		<div class="block_content">
+				{if $POST.setting}
+					{if $success}
+						<div class="message success"><p>{lang string="Setting has been added successfully!"} &nbsp; <a href="{link l='setting.edit' q='id='|cat:$sid}">{lang string="Update Setting"}</a></p></div>
+					{else}
+						<div class="message errormsg"><p>An error occured while adding setting!</p></div>
+					{/if}
+				{/if}
+				
+				{include file="forms/setting.html" data=$data type="create"}					
+		</div>		<!-- .block_content ends -->
+				
+		<div class="bendl"></div>
+		<div class="bendr"></div>
+	</div>		<!-- .block ends -->

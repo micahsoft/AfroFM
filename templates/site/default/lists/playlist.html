@@ -1,0 +1,127 @@
+
+<div class="playlist-wrap{if $hideToolbar == "true"} no-toolbar{/if}{if $inQtip == "true"} inQtip{/if}">
+	<a id="iosHandler" href="" style="display:none"></a>
+	{if $songs && $hideToolbar != "true"}
+	<div class="playlist-toolbar action">
+		<div class="wrap">
+			<div class="item fr"><span class="iswitch shuffle fr"></span><span class="fr">{lang string="Shuffle"}</span></div>
+			<div class="item fr" style="display:none"><span class="iswitch showvid fr"></span><span class="fr">{lang string="Show Video"}</span></div>
+			{if $hideAddPlaylist != "true"}<div class="item fr"><span class="fr"><a href="#" class="fr toolbarAction {if $isVideo}isVideo{/if} addToPlaylist allSongs" title="{lang string='Add All Songs To Playlist'}"><img src="{$theme_base}/images/add-to-playlist.png"></a></span><span class="fr">{lang string="Add all to playlist"}</span></div>{/if}	
+			<div class="control fl"><a href="#" class="fr toolbarAction {if $isVideo}isVideo{/if} playprev" title="{lang string='Play Previous'}"><img src="{$theme_base}/images/player-control/24/player-prev.png"></a></div>
+			<div class="control fl"><a href="#" class="fr toolbarAction {if $isVideo}isVideo{/if} playall" title="{lang string='Play All'}"><img src="{$theme_base}/images/player-control/24/player-play.png"></a></div>
+			<div class="control fl"><a href="#" class="fr toolbarAction {if $isVideo}isVideo{/if} playnext" title="{lang string='Play Next'}"><img src="{$theme_base}/images/player-control/24/player-next.png"></a></div>
+		</div>
+	</div>
+	{/if}
+	<div class="clear"></div>
+	<div class="track-list album music waitforjs" style="{if $forceShow != "true"}display:none;{/if}">
+	<div class="tracklist-content-box">
+		{if $songs}
+		<table class="tracklist-table content sortable total-flexible-columns-2 total-columns-6 {if $manage == 'true'}manage{/if}">
+		<thead>
+		<tr>
+				
+			<th class="index ascending">&nbsp;</th>
+			<th class="name flexible-col">{lang string="Name"}</th>
+			{if $showArtist == "true"}
+			<th class="artist flexible-col">{lang string="Artist"}</th>
+			{/if}
+			{if $showAlbum == "true"}
+			<th class="album flexible-col">{lang string="Album"}</th>
+			{/if}
+			{if $song.trackTimeMillis}
+			<th class="time">{lang string="Length"}</th>
+			{/if}
+			<th class="action">&nbsp;</th>
+		</tr>
+		</thead>
+		<tbody {if $pid}id="playlist"{/if}>
+
+	    {foreach from=$songs key=id item=song name=songs}
+		<tr id="{if $manage!='true'}track_row_{/if}{$song.trackId}" class="track_row {cycle values='odd,even'}{if $smarty.foreach.songs.index == 0} first-track{/if}" title="{$song.artistName} - {$song.collectionName} - {$song.trackName}" {if $manage == "true"}data-position="{$song.position}"{/if} data-track-id="{$song.trackId}" data-track-name="{$song.trackName|escape:'html'}" data-collection-id="{$song.collectionId}" data-collection-name="{$song.collectionName|escape:'html'}" data-artist-id="{$song.artistId}" data-artist-name="{$song.artistName|escape:'html'}" data-track-time-millis="{$song.trackTimeMillis}" {if $pid}data-pid="{$pid}"{/if}>
+			<td class="index ascending">
+				{if $showTrackNumber == "true"}	
+				<span class="index"><span>{$song.trackNumber}</span></span>
+				{else}
+				<span class="index"><span>{$smarty.foreach.songs.iteration}</span></span>	
+				{/if}
+			</td>
+			<td class="name {if $truncateTitles != "true"}flexible-col{/if}">
+				{if $manage == "true"}
+					<span class="text">{if $truncateTitles == "true"}{$song.trackName|truncate:40}{else}{$song.trackName}{/if}</span>
+				{else}
+					<a href="{link l='album' q='id='|cat:$song.collectionId|cat:'&tid='|cat:$song.trackId t=$song.trackName}" data-href="{link l='album' q='id='|cat:$song.collectionId|cat:'&tid='|cat:$song.trackId t=$song.trackName abs='true'}" onclick="$(this).parent().parent().find('.action .play').trigger('click'); return false;" title="{lang string='Play Track'}"><span class="text">{if $truncateTitles == "true"}{$song.trackName|truncate:40}{else}{$song.trackName}{/if}</span></a>
+				{/if}
+			</td>
+			{if $showArtist == "true"}
+			<td class="artist flexible-col">			
+				<a class="ajax_qtip" data-url="{link l='artist.brief' q='ajax=on&id='|cat:$song.artistId}" href="{link l='artist' q='id='|cat:$song.artistId t=$song.artistName}"><span class="text">{$song.artistName|truncate:40}</span></a>
+			</td>
+			{/if}
+			{if $showAlbum == "true"}
+			<td class="album flexible-col">
+				<a class="ajax_qtip" data-url="{link l='album.brief' q='ajax=on&id='|cat:$song.collectionId}" href="{link l='album' q='id='|cat:$song.collectionId t=$song.collectionName}"><span class="text">{$song.collectionName|truncate:40}</span></a>
+			</td>
+			{/if}
+			
+			<td class="time">
+				<span><span class="text">{if $song.trackTimeMillis}{math equation="round((x / 1000) / 60, 2)" x=$song.trackTimeMillis}{/if}</span></span>
+			</td>
+			
+			{if $manage == "true"}			
+			<td class="action reorder" title="{lang string='Reorder Track'}">
+				<a href="#" class="trackAction {if $isVideo}isVideo{/if} remove" title="{lang string='Remove Track'}"><img src="{$theme_base}/images/delete.png"></a>
+			</td>
+			{else}
+			<td class="action">
+				<a href="#" class="trackAction play {if $isVideo}isVideo{/if}" title="{lang string='Play Track'}"><img src="{$theme_base}/images/track-play.png"></a>
+				{if $func->setting('ENABLE_TRACK_DOWNLOAD', '1', 'Playlist Settings', 'bool')}
+				{if $inQtip != "true"}<a href="#" class="trackAction download {if $isVideo}isVideo{/if}" title="{lang string='Download Track'}"><img src="{$theme_base}/images/download-track.png"></a>{/if}
+				{/if}
+				{if $hideAddPlaylist != "true"}<a href="#" class="trackAction {if $isVideo}isVideo{/if} addToPlaylist" title="{lang string='Add To Playlist'}"><img src="{$theme_base}/images/add-to-playlist.png"></a>{/if}
+				{if $hideFbLike != "true" && $fb_js}<span class="fb-like-wrap"></span>{/if}
+			</td>
+			{/if}	
+		</tr>
+		{if $manage != "true"}
+		<tr id="player_row_{$song.trackId}" class="player_row" style="display:none;">
+			{if $showArtist == "true" && $showAlbum == "true"}
+			<td colspan="6">
+			{else}
+			<td colspan="5">
+			{/if}
+				<div id="player_wrap_{$song.trackId}" class="player_wrap" style="display:none;">
+					<div id="player_{$song.trackId}" class="player">
+					</div>
+				</div>
+				{if $hideFbComments != "true" && $fb_js}<div class="fb-comments-wrap"></div>{/if}
+			</td>
+		</tr>
+		{/if}
+		{/foreach}
+
+		</tbody>
+		</table>
+		{else}
+			<center>{lang string="No songs found!"}</center>
+		{/if}
+	</div>
+	</div>
+	{if $songs && $hideTotal != "true"}
+		<div class="marginT5 aligncenter">{lang string="Total"}: {$songs|@sizeof} Songs</div>
+	{/if}
+
+</div>
+
+{literal}
+<style>
+.qtip.downloads{
+    max-width:466px
+}
+.qtip.downloads .ui-tooltip-content {
+    overflow-y: a;
+    height: 310px;
+    padding-bottom: 15px;
+}
+</style>
+{/literal}

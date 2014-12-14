@@ -1,0 +1,128 @@
+@charset "utf-8";
+/* CSS Document */
+
+.flashContainer {
+	position: relative;
+	overflow: hidden;
+	padding-bottom: 24px;
+}
+.flashContainer .flashControl {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 24px;
+	left: 0;
+	bottom: 0;
+	background-color: #CCC;
+	overflow: hidden;
+	background: url(../images/player/bg.png) repeat-x center;
+	color: black;
+}
+.flashContainer .flashControl .flashPlay {
+	float: left;
+	display: block;
+	height: 24px;
+	width: 24px;
+	background: url(../images/player/Player-Play.png) no-repeat center center;
+	overflow: hidden;
+}
+.flashContainer .flashControl .flashPlay:hover {
+	background: url(../images/player/Player-Play-hover.png) no-repeat center center;
+}
+.flashContainer.playing .flashControl .flashPlay {
+	background: url(../images/player/Player-Pause.png) no-repeat center center;
+}	
+.flashContainer.playing .flashControl .flashPlay:hover {
+	background: url(../images/player/Player-Pause-hover.png) no-repeat center center;
+}	
+.flashContainer .flashControl .flashCurrent,
+.flashContainer .flashControl .flashDuration {
+	float: left;
+	height: 24px;
+	width: 60px;
+	overflow: hidden;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 11px;
+	line-height: 24px;
+	padding: 0px 4px;
+	text-align: center;
+	background: url(../images/player/border.png) no-repeat right center;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.flashContainer .flashControl .flashDuration {
+	float: right;
+	background: url(../images/player/border.png) no-repeat left center;
+}
+.flashContainer .flashControl .flashProgress {
+	height: 22px;
+	overflow: hidden;
+	cursor: pointer;
+	overflow: hidden;
+	margin-top: 1px;
+	-moz-opacity:0.7;-khtml-opacity:0.7;filter:alpha(opacity=70);opacity:0.7;
+}
+.flashContainer .buffering{
+	background: url(../images/player/progress-bar-back.gif) right center repeat-x;
+}
+.flashContainer .progressing{
+	background: url(../images/player/progress-bar.gif) right center repeat-x;
+}
+.flashContainer .flashControl .flashProgress .flashElapsed {
+	width: 0;
+	height: 100%;
+	-moz-opacity: .7;
+	filter: alpha(opacity=70);
+	opacity: .8;
+	border-right: 1px solid #999;
+}
+.flashContainer .flashControl .flashMute {
+	float: right;
+	display: block;
+	height: 24px;
+	width: 24px;
+	background: url(../images/player/Sound-On.png) no-repeat center center;
+	overflow: hidden;
+}
+.flashContainer .flashControl .flashMute:hover {
+	background: url(../images/player/Sound-On-hover.png) no-repeat center center;
+}
+.flashContainer.muted .flashControl .flashMute {
+	background: url(../images/player/Sound-Off.png) no-repeat center center;
+}
+.flashContainer.muted .flashControl .flashMute:hover {
+	background: url(../images/player/Sound-Off-hover.png) no-repeat center center;
+}
+.flashContainer .flashControl .flashClear {
+	clear: both;
+}
+.flashContainer .flashControl .flashVolume {
+	float: right;
+	height: 20px;
+	width: 60px;
+	background: url(../images/player/border.png) no-repeat right center;
+	overflow: hidden;
+	cursor: pointer;
+	padding: 2px;
+}
+.flashContainer .flashControl .flashVolume .flashCursor {
+	float: left;
+	height: 20px;
+	width: 5px;
+	border-right: 1px solid #fff;
+	overflow: hidden;
+	cursor: pointer;
+	background-color: #aaa;
+}
+.flashContainer .flashControl .flashVolume .flashCursor.selected {
+	background-color: #000;
+	-moz-opacity: .9;
+	filter: alpha(opacity=90);
+	opacity: .9;
+}
+.flashContainer:hover .flashControl {
+	display: block;
+}

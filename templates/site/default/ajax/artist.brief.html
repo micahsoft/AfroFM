@@ -1,0 +1,46 @@
+<div class="brief">
+		<div class="head">
+			<div class="wrap">
+			<table><tr><td valign="top">
+			{if $picture[0]}
+				<div class="picture hidden"><a href="{link l='artist' q='id='|cat:$artist.artistId t=$artist.artistName}"><img alt="{$artist.artistName}" onerror="checkOtherPicture(this);" onload="$(this).parent().parent().fadeIn()" src="{$picture[0].url}" /></a></div>
+			{/if}
+			</td><td valign="top">
+			<div class="bio-stats">
+				<h1><a href="{link l='artist' q='id='|cat:$artist.artistId t=$artist.artistName}">{$artist.artistName}</a></h1>
+				<div class="clear"></div>
+				{foreach from=$bio.info key=key item=info}
+					<p>
+						<span><b>{lang string=$key}:</b></span>
+						<span>{$info}</span>
+					</p>
+				{/foreach}
+				<p>
+					<span><b>{lang string="Genre"}:</b> </span>
+					<span><a href="{link l='artists' q='id='|cat:$artist.primaryGenreId t=$artist.primaryGenreName}">{$artist.primaryGenreName}</a></span>
+				</p>
+			</div>
+			</td></tr></table>
+			</div>
+		</div>	
+		<div class="clear"></div>
+		<div class="body">
+			{if $bio || $albums}
+				{if $bio.brief}
+				<div id="biography" class="biography collapsed">
+					<h4>{lang string="Biography"}</h4>
+					<div class="teaser">
+						<div>{$bio.brief}</div>
+					</div>
+				</div>
+				{/if}
+	
+				{if $albums}
+	                <h4>{lang string="Top Albums"}</h4>
+				    {include file="lists/albums.html" albums=$albums}
+				{/if}
+		{else}
+			<div class="foot"><div class="wrap">{lang string="We did not find any information about this artist"}</div></div>	
+		{/if}
+		</div>	
+</div>

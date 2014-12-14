@@ -1,0 +1,102 @@
+<form method="post">
+		{if $type == 'update'}
+		<div class="fr pic-container action">
+			{if $data.picture}<a class="ajax remove-pic" href="{link l='users' q='ajax=on'}" data-action="delete" data-item="picture" data-params="action=rmuserpic&uid={$data.id}" data-filepath="{$website_url}{$smarty.const.DIR_PROFILE_PICS}" data-targetimage="#user-pic"><img src="{$theme_base}images/remove_32.png"></a>{/if}
+			<img id="user-pic" class="ui-corner-all user-pic-large" src="{$website_url}{$smarty.const.DIR_PROFILE_PICS}{if $data.picture}{$data.picture}{else}profile_{if $data.sex}{$data.sex}{else}male{/if}.gif{/if}">
+			<p class="fileupload">
+				<label>{lang string="Picture"}:</label><br />
+				<input type="file" name="picture" id="fileupload" value="{$data.picture}" data-name="{lang string='User Picture'}" data-action="{link l='users' q='ajax=on'}" data-params="action=uploadpic&uid={$data.id}" data-filepath="{$website_url}{$smarty.const.DIR_PROFILE_PICS}" data-targetimage="#user-pic"/>
+				<span id="uploadmsg">{lang string="Max size 2Mb"}</span>
+			</p>	
+		</div>
+		{/if}
+		<div class="fl">
+						<input type="hidden" name="l" value="{$location}">
+						<p>
+							<label>{lang string="Username"}:</label><br />
+							<input type="text" name="user[username]" class="text small" value="{$data.username}" /> 
+							{$form->error('username')}
+						</p>
+						<p>
+							<label>{lang string="Email"}:</label><br />
+							<input type="text" name="user[email]" class="text small" value="{$data.email}" /> 
+							{$form->error('email')}
+						</p>
+						<p>
+							<label>{lang string="Password"}:</label><br />
+							<input type="password" name="user[password]" class="text small" value=""/> 
+							{$form->error('password')}
+						</p>
+						{if $type == 'create'}
+						<p>
+							<label>{lang string="Confirm Password"}:</label><br />
+							<input type="password" name="user[password2]" class="text small" value=""/>
+							{$form->error('password2')}
+						</p>
+						{/if}
+						<p>
+							<label>{lang string="Bday"}:</label> <br />
+							<input type="text" name="user[bday]" class="text date_picker" value="{$data.bday}" />
+							{$form->error('bday')}
+						</p>
+						<div class="clear"></div>
+						
+						<p>
+							<label>{lang string="User is a"}:</label>
+							<select name="user[sex]" class="styled">
+								<option value="">---</option>
+								<option {if $data.sex == 'male'}selected{/if} value="male">{lang string="Male"}</option>
+								<option {if $data.sex == 'female'}selected{/if} value="female">{lang string="Female"}</option>				
+							</select>
+							{$form->error('sex')}
+						</p>						
+						
+						<p>
+							<label>{lang string="Select Country"}:</label> <br />
+							<select name="user[country]" class="styled">
+								<option value="">---</option>
+				    			{foreach from=$dbase->getCountries() item=country name=countries}
+				    			<option {if $data.country.id == $country.id}selected{/if} value="{$country.id}">{$country.name}</option>
+				    			{/foreach}
+							</select>
+							{$form->error('country')}
+						</p>
+
+						
+						{if $type == 'update'}			
+						<p>
+							<label>{lang string="User level"}:</label> <br />
+							<select name="user[userlevel]" class="styled">
+								<option value="">---</option>
+								<option {if $data.userlevel == '1'}selected{/if} value="1">{lang string="Regular User"}</option>
+								<option {if $data.userlevel == '9'}selected{/if} value="9">{lang string="Super User"}</option>				
+							</select>
+							{$form->error('userlevel')}
+						</p>
+						<p>
+							<label>{lang string="Site Language"}:</label> <br />
+							<select name="user[language]" class="styled">
+								<option>---</option>
+								{foreach from=$func->getLanguages() item=lang name=languages}
+									<option {if $data.language == $lang.code}selected{/if} value="{$lang.code}">{lang string=$lang.name}</option>
+								{/foreach}
+							</select>
+				 			{$form->error('language')}
+						</p>
+
+						<p>
+							<label>{lang string="About"}:</label><br />
+							<textarea class="wysiwyg" name="user[about]">{$data.about}</textarea>
+							{$form->error('about')}
+						</p>
+						
+						{/if}
+																							
+						<hr />
+						
+						<p>
+							<input type="submit" class="submit small" value="{if $type == 'create'}{lang string='Create User'}{else}{lang string='Save User'}{/if}" />
+							<a class="submit small" href="{link l='users'}">{lang string="Back"}</a>
+						</p>
+			</div>			
+</form>

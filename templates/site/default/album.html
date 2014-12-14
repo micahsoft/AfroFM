@@ -1,0 +1,50 @@
+		<div id="title" class="intro">
+			<span class="fr share-this">{include file="items/sharethis.html"}</span>
+			<h1>{$album.collectionName} <span title="{lang string='View more by this Artist'}"><a href="{link l='artist' q='id='|cat:$album.artistId t=$album.artistName}">{$album.artistName}</a> <img src="{$theme_base}images/magnifier.png"></span></h1>
+			<div class="clear"></div>
+		</div>
+
+		<div class="center-stack">
+			{if $songs}
+			    {include file="lists/playlist.html" songs=$songs showTrackNumber="true"}
+			    <div class="marginT10 paddingB10">{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}</div>
+			{/if}
+			<br>
+			{if $topAlbums}	
+				<h3>{lang string="Top Albums and Songs by"} {$album.artistName} </h3>
+				{include file="lists/albums.html" albums=$topAlbums}
+			{/if}
+		</div>
+		<div id="left-stack">
+			<div class="darkBox ui-corner-all">
+			<div class="lockup product album music">
+				<a href="{link l='album' q='id='|cat:$album.collectionId t=$album.collectionName}">
+				<div class="artwork aligncenter">
+					<img src="{$album.artworkUrl100}" class="artwork" alt="{$album.collectionName}, {$album.artistName}">
+				</div>
+				</a>
+				<ul class="list">
+					{if $album.collectionPrice && $album.collectionPrice != -1}
+						<h6><span class="fr" id="buynow" data-url="{$album.collectionViewUrl}"></span> <span class="price">{$album.collectionPrice}</span></h6>
+					{/if}
+					
+					<li><h6>{lang string="Genre"}: <span>{$album.primaryGenreName}</span></h6></li>
+					
+ 					{if $album.releaseDate}
+						<li><h6>{lang string="Release"}: <span>{$album.releaseDate|date_format}</span></h6></li>
+						
+					{/if}
+
+					{if $album.copyright}
+					<li class="copyright last">&#8471; {$album.copyright}</li>
+					{/if}
+				</ul>
+			</div>
+			</div>
+			
+			<div class="ads">{include file="ads/getAd.html" key="AD_ZONE_160_X_600" showHeader="true"}</div>
+			{if $topAlbums}
+				<div class="fb-activity ui-corner-all marginT10" data-site="{$smarty.const.HOST}" data-action="recommend" data-width="220" data-height="500" data-header="true" data-linktarget="_top" data-border-color="#FAFAFA" data-font="arial" data-recommendations="true"></div>
+			{/if}
+		</div>
+		{$playSongJs}

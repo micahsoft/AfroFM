@@ -1,0 +1,19 @@
+Options -MultiViews
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+#RewriteBase /
+
+RewriteRule ^index.html index.php
+RewriteRule ^admin admin.php
+
+### The rest of the seo links will be processed within the php code
+
+#other page, redirect to error page
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)/ index.php?l=$1
+
+</IfModule>

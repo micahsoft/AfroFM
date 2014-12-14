@@ -1,0 +1,26 @@
+{if $summary}
+	<div class="summary">
+		{$summary}
+	</div>
+{/if}
+				
+{if $users}
+	<div class="users search">
+		<ul>
+			{foreach from=$users item=user}
+					<li class="user_float">
+						<a class="ui-corner-all" title="{$user.username} - {lang string='visit profile'}" href="{link l='profile' q='u='|cat:$user.username}"><div class="user-picture ui-corner-all"><img src="{$website_url}{$smarty.const.DIR_PROFILE_PICS}{if $user.picture}{$user.picture}{else}profile_small_{$user.sex}.gif{/if}" /></div> <em class="fr"> {if $user.country.id}{$user.country.name|truncate:20} <img class="marginL5" src="{$theme_base}images/flags/{$user.country.id|lower}.png"/><br>{/if}{if $user.is_online}<img class="marginT5 ui-corner-all" src="{$theme_base}images/online.gif">{/if}</em>{$user.username} {if $user.playlists}<br /><span class="playlists_count">{$user.playlists} {lang string='playlists' ucfirst="false"}</span>{/if}</a>
+					</li>	
+			{/foreach}
+		</ul>
+		<div class="clear"></div>
+	</div>
+{else}
+	<div class="message alert">{lang string="No users found!"}</div>
+{/if}
+<div class="clear"></div>
+{if $pages}
+	<div class="pagination">
+		{$pages}
+	</div>
+{/if}

@@ -1,0 +1,3 @@
+<?php
+// ENGLISH LANGUAGE // Dont close php tag at the end...
+?>

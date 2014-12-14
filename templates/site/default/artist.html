@@ -1,0 +1,100 @@
+		<div id="title" class="intro">
+			<span class="fr share-this">{include file="items/sharethis.html"}</span>
+			<h1>{$artist.artistName}</h1>
+			<div class="clear"></div>
+		</div>
+
+		<div class="center-stack">
+		{if $bio || $albums || $songs}
+			{if $bio.brief}
+			<div id="biography" class="biography collapsed">
+				<h4>{lang string="Biography"}</h4>
+				<div class="teaser">
+					<div>{$bio.brief}</div>
+					<a onclick="$('#biography').toggleClass('collapsed'); return false;" class="read-more" href="#">...{lang string="More"}</a>
+				</div>
+				{foreach from=$bio.extra item=bioextra}
+					<p class="extra">{$bioextra}</p>
+				{/foreach}
+				<a class="extra" onclick="$('#biography').toggleClass('collapsed').focus(); return false;" class="read-less" href="">...{lang string="Less"}</a>
+				<br>
+			</div>
+			{/if}
+			
+			{if $albums}
+                <h4>{lang string="Top Albums"}</h4>
+			    {include file="lists/albums.html" albums=$albums}
+				<div class="marginT10 paddingB10">{include file="ads/getAd.html" key="AD_ZONE_728_X_90"}</div>
+			{/if}
+
+			{if $songs}
+                <h4>{lang string="Top Songs"}</h4>
+			    <div class="marginT5">{include file="lists/playlist.html" songs=$songs showAlbum="true"}</div>
+			{/if}
+		{else}
+			<div class="message alert">{lang string="We did not find any information about this artist"} <span class="fr"><a href="javascript:history.back()">{lang string="<- Go Back"}</a></span></div>	
+		{/if}	
+		</div>
+		<div id="left-stack">
+			<div class="darkBox ui-corner-all">
+			{if $pictures[0]}
+				<div class="artist-picture hidden"><a class="lightbox" title="{$pictures[0].title}" target="_blank" href="{$pictures[0].url}"><img alt="{$artist.artistName}" onerror="checkOtherPicture(this); loadLightbox();" onload="$(this).parent().parent().fadeIn()" src="{$pictures[0].url}"></a></div>
+			{/if}
+			<div class="bio-stats">
+				{foreach from=$bio.info key=key item=info}
+					<h4>{lang string=$key}:</h4>
+					<p>{$info}</p>
+				{/foreach}
+				<h4>{lang string="Genre"}: <a href="{link l='artists' q='id='|cat:$artist.primaryGenreId t=$artist.primaryGenreName}">{$artist.primaryGenreName}</a></h4>
+			</div>
+			</div>
+			
+			{if $pictures}
+			<div id="pictures" class="darkBox ui-corner-all">
+				<h4>{lang string="Pictures"}</h4>
+				{foreach from=$pictures item=pic name=pictures}
+					{if $smarty.foreach.pictures.index != 0}
+					<div class="artist-thumb hidden"><a title="{$pic.title}" class="lightbox" target="_blank" href="{$pic.url}"><img onerror="$(this).parent().parent().remove(); loadLightbox();" onload="$(this).parent().parent().fadeIn()" src="{$pic.url}"></a></div>
+					{/if}
+				{/foreach}
+				<div class="clear"></div>
+				<small>{lang string="Powered by Google"}</small>
+			</div>
+			{/if}
+				
+			{if $bio.influencers}
+			<div class="darkBox ui-corner-all">
+				<h4>{lang string="Influencers"}</h4>
+				<ul class="list artists">
+					{foreach from=$bio.influencers key=id item=artist}
+					<li class="ajax_qtip" data-url="{link l='artist.brief' q='ajax=on&id='|cat:$artist.id}"><a href="{link l='artist' q='id='|cat:$artist.id t=$artist.name}">{$artist.name}</a></li>					
+					{/foreach}
+				</ul>
+			</div>
+			{/if}
+			{if $bio.followers}
+			<div class="darkBox ui-corner-all">
+				<h4>{lang string="Followers"} </h4>
+				<ul class="list artists">
+					{foreach from=$bio.followers key=id item=artist}
+					<li class="ajax_qtip" data-url="{link l='artist.brief' q='ajax=on&id='|cat:$artist.id}"><a href="{link l='artist' q='id='|cat:$artist.id t=$artist.name}">{$artist.name}</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			{/if}
+			{if $bio.contemporaries}
+			<div class="darkBox ui-corner-all">
+				<h4>{lang string="Contemporaries"}</h4>
+				<ul class="list artists">
+					{foreach from=$bio.contemporaries key=id item=artist}
+					<li class="ajax_qtip" data-url="{link l='artist.brief' q='ajax=on&id='|cat:$artist.id}"><a href="{link l='artist' q='id='|cat:$artist.id t=$artist.name}">{$artist.name}</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			{/if}
+			
+			<div class="ads">{include file="ads/getAd.html" key="AD_ZONE_160_X_600" showHeader="true"}</div>
+			{if $bio.brief && $songs}
+				<div class="fb-activity ui-corner-all marginT10" data-site="{$smarty.const.HOST}" data-action="recommend" data-width="220" data-height="500" data-header="true" data-linktarget="_top" data-border-color="#FAFAFA" data-font="arial" data-recommendations="true"></div>
+			{/if}
+		</div>

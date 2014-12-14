@@ -1,0 +1,28 @@
+{if $meta_redirect}
+    	{$meta_redirect}
+{else}
+	<div class="block_content">			
+		<div class="message info"><strong>{lang string="Restricted Area!"}</strong> {lang string="Please login below."}</div>
+					
+		<form method="post">
+			<p>
+				<label>{lang string="Username"}:</label> <br />
+				<input type="text" id="login_username" name="login_username" class="text" value="{$POST.login_username}" />
+				{$form->error('login_username')}
+			</p>		
+			<p>
+				<label>{lang string="Password"}:</label> <br />
+				<input type="password" name="login_password" class="text" value="" />
+				{$form->error('login_password')}
+			</p>			
+			<p>
+				<input type="submit" class="submit" value="Login" /> &nbsp; 
+				<input type="checkbox" class="checkbox"  name="remember" checked="checked" id="rem" value="{$POST.remember}" /> <label for="rememberme">{lang string="Remember"}</label>
+			</p>
+			<input type="hidden" name="sublogin" value="1">
+			<input type="hidden" name="refererLoc" value="{$refererLoc}">
+			<input type="hidden" name="refererParams" value="{$refererParams}">
+		</form>
+		<script>$('#login_username').focus();</script>			
+	</div>	
+{/if}				

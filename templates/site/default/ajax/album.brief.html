@@ -1,0 +1,46 @@
+<div class="brief">
+		<div class="head">
+			<div class="wrap">
+			<table><tr><td valign="top">
+				<div class="picture">
+					<a href="{link l='album' q='id='|cat:$album.collectionId t=$album.collectionName}">
+						<img src="{$album.artworkUrl100}" class="artwork" alt="{$album.collectionName}, {$album.artistName}" />
+					</a>
+				</div>
+			</td><td valign="top">
+			<div class="bio-stats">
+				<h1><a href="{link l='album' q='id='|cat:$album.collectionId t=$album.collectionName}">{$album.collectionName|truncate:30}</a></h1>
+				<h2>
+					<a href="{link l='artist' q='id='|cat:$album.artistId t=$album.artistName}">{$album.artistName}</a> 
+				</h2>
+				<div class="clear"></div>
+				<p>
+					<span><b>{lang string="Genre"}:</b></span>
+					<span>{$album.primaryGenreName}</span>
+				</p>
+					
+ 				{if $album.releaseDate}
+					<p>
+						<span><b>{lang string="Release"}:</b></span> 
+						<span>{$album.releaseDate|date_format}</span>
+					</p>
+				{/if}
+
+				{if $album.copyright}
+					<p class="copyright last"><span>&#8471; {$album.copyright|truncate:70}</span></p>
+				{/if}
+			</div>
+			</td></tr></table>
+			</div>
+		</div>	
+		<div class="clear"></div>
+		<div class="body">
+			{if $songs}
+			    {include file="lists/playlist.html" songs=$songs showTrackNumber="true" forceShow="true" inQtip="true" hideTotal="true" truncateTitles="true" hideAddPlaylist="true" hideToolbar="true" hideFbLike="true" hideFbComments="true"}
+			{/if}
+		</div>
+		{if $songs}
+			<div class="foot"><div class="wrap"><b>{lang string="Total"}: {$songs|@sizeof} Songs</b></div></div>
+		{/if}
+	
+</div>
